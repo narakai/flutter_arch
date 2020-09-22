@@ -1,3 +1,6 @@
+import 'package:flutter_arch/view_model/locale_model.dart';
+import 'package:flutter_arch/view_model/theme_model.dart';
+import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 List<SingleChildWidget> providers = [
@@ -8,12 +11,12 @@ List<SingleChildWidget> providers = [
 
 /// 独立的model
 List<SingleChildWidget> independentServices = [
-//  ChangeNotifierProvider<ThemeModel>(
-//    create: (context) => ThemeModel(),
-//  ),
-//  ChangeNotifierProvider<LocaleModel>(
-//    create: (context) => LocaleModel(),
-//  ),
+  ChangeNotifierProvider<ThemeModel>(
+    create: (context) => ThemeModel(),
+  ),
+  ChangeNotifierProvider<LocaleModel>(
+    create: (context) => LocaleModel(),
+  ),
 //  ChangeNotifierProvider<GlobalFavouriteStateModel>(
 //    create: (context) => GlobalFavouriteStateModel(),
 //  )

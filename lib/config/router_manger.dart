@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_arch/ui/page/splash.dart';
+import 'package:flutter_arch/ui/widget/page_route_anim.dart';
 
 class RouteName {
   static const String splash = 'splash';
@@ -18,7 +20,8 @@ class RouteName {
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-
+      case RouteName.splash:
+        return NoAnimRouteBuilder(SplashPage());
       default:
         return CupertinoPageRoute(
             builder: (_) => Scaffold(
