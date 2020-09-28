@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_arch/generated/l10n.dart';
 import 'package:flutter_arch/ui/page/tab/project_page.dart';
 
+import 'expand_page.dart';
+
 List<Widget> pages = <Widget>[
   ProjectPage(),
-  ProjectPage(),
+  ExpandPage(),
   ProjectPage(),
   ProjectPage(),
   ProjectPage()
