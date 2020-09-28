@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_arch/config/resource_mananger.dart';
+import 'package:flutter_arch/ui/widget/custom_expansion.dart';
 import 'package:flutter_arch/ui/widget/image.dart';
 import 'package:flutter_arch/utils/status_bar_utils.dart';
 
@@ -23,21 +24,15 @@ class _ExpandWidget extends State<ExpandPage> {
         ),
         body: ListView.builder(
           itemBuilder: (context, index) {
-            return Theme(
-              data: ThemeData(
-                primaryColor: Colors.black,
-                accentColor: Colors.black
-              ),
-              child: ExpansionTile(
-                key: new PageStorageKey(index),
-                  trailing: Container(child: map[index] ? Icon(Icons.map) : Icon(Icons.ac_unit)),
-                  title: Container(
-                      child: Text(
-                    "$index个"),
-                  ),
-                  onExpansionChanged: (bool expanding) => setState(() => map[index] = expanding),
-                  children: list.map((e) => ListTile(title: Text(e))).toList()),
-            );
+            return CustomExpansionTile(
+              key: new PageStorageKey(index),
+                // trailing: Container(child: map[index] ? Icon(Icons.map) : Icon(Icons.ac_unit)),
+                title: Container(
+                    child: Text(
+                  "$index个"),
+                ),
+                // onExpansionChanged: (bool expanding) => setState(() => map[index] = expanding),
+                children: list.map((e) => ListTile(title: Text(e))).toList());
           },
           itemCount: list.length,
         ),
