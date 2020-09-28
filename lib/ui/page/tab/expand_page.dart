@@ -17,9 +17,11 @@ class _ExpandWidget extends State<ExpandPage> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: StatusBarUtils.systemUiOverlayStyle(context),
-      child: Container(
-        color: Colors.tealAccent,
-        child: ListView.builder(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('expansion tile demo'),
+        ),
+        body: ListView.builder(
           itemBuilder: (context, index) {
             return Theme(
               data: ThemeData(
