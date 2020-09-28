@@ -16,16 +16,13 @@ class ArticleItemWidget extends StatelessWidget {
   /// 首页置顶
   final bool top;
 
-  /// 隐藏收藏按钮
-  final bool hideFavourite;
-
-  ArticleItemWidget(this.article,
-      {this.index, this.onTap, this.top: false, this.hideFavourite: true})
+  ArticleItemWidget(this.article, {this.index, this.onTap, this.top: false})
       : super(key: ValueKey(article.id));
 
   @override
   Widget build(BuildContext context) {
     var backgroundColor = Theme.of(context).scaffoldBackgroundColor;
+
     /// 用于Hero动画的标记
     UniqueKey uniqueKey = UniqueKey();
     return Stack(
@@ -45,8 +42,8 @@ class ArticleItemWidget extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                   border: Border(
-                bottom: Divider.createBorderSide(context, width: 0.7),
-              )),
+                    bottom: Divider.createBorderSide(context, width: 0.7),
+                  )),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +61,9 @@ class ArticleItemWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 5),
                         child: Text(
-                          isNotBlank(article.author) ? article.author : article.shareUser ?? '',
+                          isNotBlank(article.author)
+                              ? article.author
+                              : article.shareUser ?? '',
                           style: Theme.of(context).textTheme.caption,
                         ),
                       ),
