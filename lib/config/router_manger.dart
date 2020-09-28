@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_arch/ui/page/splash.dart';
+import 'package:flutter_arch/ui/page/tab/tab_navigator.dart';
 import 'package:flutter_arch/ui/widget/page_route_anim.dart';
 
 class RouteName {
@@ -22,6 +23,8 @@ class Router {
     switch (settings.name) {
       case RouteName.splash:
         return NoAnimRouteBuilder(SplashPage());
+      case RouteName.tab:
+        return NoAnimRouteBuilder(TabNavigator());
       default:
         return CupertinoPageRoute(
             builder: (_) => Scaffold(

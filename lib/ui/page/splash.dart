@@ -178,7 +178,7 @@ class AnimatedAndroidLogo extends AnimatedWidget {
 }
 
 void nextPage(context) {
-//  Navigator.of(context).pushReplacementNamed(RouteName.tab);
+ Navigator.of(context).pushReplacementNamed(RouteName.tab);
 }
 
 class GuidePage extends StatefulWidget {
