@@ -29,6 +29,7 @@ class _ExpandWidget extends State<ExpandPage> {
                 accentColor: Colors.black
               ),
               child: ExpansionTile(
+                key: new PageStorageKey(index),
                   trailing: Container(child: map[index] ? Icon(Icons.map) : Icon(Icons.ac_unit)),
                   title: Container(
                       child: Text(
