@@ -7,7 +7,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-
 const Duration _kExpand = Duration(milliseconds: 200);
 
 /// A single-line [ListTile] with a trailing button that expands or collapses
@@ -44,12 +43,12 @@ class CustomExpansionTile extends StatefulWidget {
     this.expandedCrossAxisAlignment,
     this.expandedAlignment,
     this.childrenPadding,
-  }) : assert(initiallyExpanded != null),
+  })  : assert(initiallyExpanded != null),
         assert(maintainState != null),
         assert(
-        expandedCrossAxisAlignment != CrossAxisAlignment.baseline,
-        'CrossAxisAlignment.baseline is not supported since the expanded children '
-            'are aligned in a column, not a row. Try to use another constant.',
+          expandedCrossAxisAlignment != CrossAxisAlignment.baseline,
+          'CrossAxisAlignment.baseline is not supported since the expanded children '
+          'are aligned in a column, not a row. Try to use another constant.',
         ),
         super(key: key);
 
@@ -146,10 +145,14 @@ class CustomExpansionTile extends StatefulWidget {
   _CustomExpansionTileState createState() => _CustomExpansionTileState();
 }
 
-class _CustomExpansionTileState extends State<CustomExpansionTile> with SingleTickerProviderStateMixin {
-  static final Animatable<double> _easeOutTween = CurveTween(curve: Curves.easeOut);
-  static final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
-  static final Animatable<double> _halfTween = Tween<double>(begin: 0.0, end: 0.25);
+class _CustomExpansionTileState extends State<CustomExpansionTile>
+    with SingleTickerProviderStateMixin {
+  static final Animatable<double> _easeOutTween =
+      CurveTween(curve: Curves.easeOut);
+  static final Animatable<double> _easeInTween =
+      CurveTween(curve: Curves.easeIn);
+  static final Animatable<double> _halfTween =
+      Tween<double>(begin: 0.0, end: 0.25);
 
   final ColorTween _borderColorTween = ColorTween();
   final ColorTween _headerColorTween = ColorTween();
@@ -175,11 +178,12 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> with SingleTi
     _borderColor = _controller.drive(_borderColorTween.chain(_easeOutTween));
     _headerColor = _controller.drive(_headerColorTween.chain(_easeInTween));
     _iconColor = _controller.drive(_iconColorTween.chain(_easeInTween));
-    _backgroundColor = _controller.drive(_backgroundColorTween.chain(_easeOutTween));
+    _backgroundColor =
+        _controller.drive(_backgroundColorTween.chain(_easeOutTween));
 
-    _isExpanded = PageStorage.of(context)?.readState(context) as bool ?? widget.initiallyExpanded;
-    if (_isExpanded)
-      _controller.value = 1.0;
+    _isExpanded = PageStorage.of(context)?.readState(context) as bool ??
+        widget.initiallyExpanded;
+    if (_isExpanded) _controller.value = 1.0;
   }
 
   @override
@@ -195,8 +199,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> with SingleTi
         _controller.forward();
       } else {
         _controller.reverse().then<void>((void value) {
-          if (!mounted)
-            return;
+          if (!mounted) return;
           setState(() {
             // Rebuild without widget.children.
           });
@@ -222,18 +225,37 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> with SingleTi
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          ListTileTheme.merge(
-            iconColor: _iconColor.value,
-            textColor: _headerColor.value,
-            child: ListTile(
-              onTap: _handleTap,
-              contentPadding: widget.tilePadding,
-              leading: widget.leading,
-              title: widget.title,
-              subtitle: widget.subtitle,
-              trailing: widget.trailing ?? RotationTransition(
-                turns: _iconTurns,
-                child: const Icon(Icons.arrow_forward),
+          // ListTileTheme.merge(
+          //   iconColor: _iconColor.value,
+          //   textColor: _headerColor.value,
+          //   child: ListTile(
+          //     onTap: _handleTap,
+          //     contentPadding: widget.tilePadding,
+          //     leading: widget.leading,
+          //     title: widget.title,
+          //     subtitle: widget.subtitle,
+          //     trailing: widget.trailing ?? RotationTransition(
+          //       turns: _iconTurns,
+          //       child: const Icon(Icons.arrow_forward),
+          //     ),
+          //   ),
+          // ),
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: _handleTap,
+            child: Container(
+              padding: const EdgeInsets.all(15),
+              child: Row(
+                children: <Widget>[
+                  widget.title,
+                  Expanded(
+                    child: SizedBox.shrink(),
+                  ),
+                  RotationTransition(
+                    turns: _iconTurns,
+                    child: const Icon(Icons.arrow_forward),
+                  ),
+                ],
               ),
             ),
           ),
@@ -248,9 +270,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> with SingleTi
             width: double.infinity,
             height: 5.0,
             child: const DecoratedBox(
-              decoration: const BoxDecoration(
-                  color: Colors.black12
-              ),
+              decoration: const BoxDecoration(color: Colors.black12),
             ),
           ),
         ],
@@ -284,14 +304,14 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> with SingleTi
           child: Padding(
             padding: widget.childrenPadding ?? EdgeInsets.zero,
             child: Column(
-              crossAxisAlignment: widget.expandedCrossAxisAlignment ?? CrossAxisAlignment.center,
+              crossAxisAlignment: widget.expandedCrossAxisAlignment ??
+                  CrossAxisAlignment.center,
               children: widget.children,
             ),
           ),
           enabled: !closed,
         ),
-        offstage: closed
-    );
+        offstage: closed);
 
     return AnimatedBuilder(
       animation: _controller.view,
