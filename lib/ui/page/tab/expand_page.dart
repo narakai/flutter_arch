@@ -12,10 +12,17 @@ class ExpandPage extends StatefulWidget {
 
 class _ExpandWidget extends State<ExpandPage> {
   final list = List.generate(10, (index) => "这是第$index个数据");
-  var map = {0:false, 1:false, 2:false, 3:false, 4:false, 5:false, 6:false, 7:false, 8:false, 9:false};
+  final Map<int, bool> map = {};
 
   @override
   Widget build(BuildContext context) {
+    for (var value1 in list) {
+      if (list.indexOf(value1) == 0) {
+        map[list.indexOf(value1)] = true;
+      } else {
+        map[list.indexOf(value1)] = false;
+      }
+    }
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: StatusBarUtils.systemUiOverlayStyle(context),
       child: Scaffold(
@@ -25,6 +32,7 @@ class _ExpandWidget extends State<ExpandPage> {
         body: ListView.builder(
           itemBuilder: (context, index) {
             return CustomExpansionTile(
+              initiallyExpanded: map[index],
               key: new PageStorageKey(index),
                 // trailing: Container(child: map[index] ? Icon(Icons.map) : Icon(Icons.ac_unit)),
                 title: Container(
