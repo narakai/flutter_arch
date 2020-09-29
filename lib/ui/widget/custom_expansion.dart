@@ -240,8 +240,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
           //     ),
           //   ),
           // ),
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
+          InkWell(
             onTap: _handleTap,
             child: Container(
               padding: const EdgeInsets.all(15),
