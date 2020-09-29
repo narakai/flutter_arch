@@ -59,8 +59,19 @@ class _ExpandWidget extends State<ExpandPage> {
                     decoration: BoxDecoration(color: Color(0x90000000)),
                   ),
                   Container(
+                    constraints: BoxConstraints(
+                      maxHeight: MediaQuery.of(context).size.height - 200
+                    ),
                     width: double.infinity,
-                    height: 200.0,
+                    // height: 200.0,
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                        title: Text("inner $index"),
+                        );
+                      },
+                      itemCount: list.length * 2,
+                    ),
                     decoration: ShapeDecoration(
                         color: Colors.white,
                         shape: RoundedRectangleBorder(
